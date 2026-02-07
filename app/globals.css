@@ -1,26 +1,373 @@
 @import "tailwindcss";
 
+/* ====== Design tokens (tryb domyślny – ciemny) ====== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Główne tła i tekst */
+  --background: #050814;
+  --foreground: #f4f4ff;
+
+  /* Brand / surface */
+  --bg-900: #050814;
+  --bg-800: #080b1f;
+  --bg-700: #101428;
+
+  --surface-900: #0d1024;
+  --surface-800: #151832;
+  --surface-700: #1e2240;
+
+  --primary-300: #b087ff;
+  --primary-400: #c69bff;
+  --primary-500: #d9b4ff;
+  --primary-600: #a46bff;
+  --primary-700: #7c47e6;
+
+  --accent-pink: #ff5ae6;
+  --accent-cyan: #33e5ff;
+
+  --text-base: #f4f4ff;
+  --text-soft: #c3c6f5;
+  --text-mute: #8c90bf;
+
+  --border-subtle: #222643;
+  --border-strong: #343a5c;
+
+  --glow-violet: #b38cff;
+  --glow-blue: #4d7dff;
+
+  --radius-card: 1.5rem;
 }
+
+/* Jasny motyw jeśli chcesz respektować prefers-color-scheme */
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: #f5f3ff;
+    --foreground: #171717;
+
+    --bg-900: #f4f2ff;
+    --bg-800: #ebe7ff;
+    --bg-700: #dcd4ff;
+
+    --surface-900: #ffffff;
+    --surface-800: #f8f6ff;
+    --surface-700: #ece8ff;
+
+    --text-base: #171717;
+    --text-soft: #3f3f46;
+    --text-mute: #71717a;
+
+    --border-subtle: #e4e4f7;
+    --border-strong: #c7c7ef;
+  }
+}
+
+/* ====== Powiązanie z Tailwindem przez @theme inline ====== */
+/* Teraz możesz używać: bg-bg-900, text-text-soft, border-border-subtle itd. */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-bg-900: var(--bg-900);
+  --color-bg-800: var(--bg-800);
+  --color-bg-700: var(--bg-700);
+
+  --color-surface-900: var(--surface-900);
+  --color-surface-800: var(--surface-800);
+  --color-surface-700: var(--surface-700);
+
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-cyan: var(--accent-cyan);
+
+  --color-text-base: var(--text-base);
+  --color-text-soft: var(--text-soft);
+  --color-text-mute: var(--text-mute);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+
+  --color-glow-violet: var(--glow-violet);
+  --color-glow-blue: var(--glow-blue);
+
+  --radius-card: var(--radius-card);
+
+  --font-sans: var(--font-poppins);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ====== Bazowe style ====== */
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family:
+    var(--font-poppins),
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Kontener z pełnoekranowym snapowaniem sekcji (patrz main) */
+.main-scroll {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+  height: 100vh;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.main-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Każda sekcja: pełny ekran + snap na początek */
+.section {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+/* On mobile, allow sections to grow beyond viewport and show overflow */
+@media (max-width: 639px) {
+  .section {
+    overflow: visible;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ====== Ambient section backgrounds ====== */
+/* Each section gets a unique radial glow that fades into the base dark bg. */
+/* No hard edges — the gradient blends naturally with bg-900 behind.        */
+
+.section-hero {
+  background:
+    radial-gradient(ellipse 80% 60% at 25% 50%, rgba(179, 140, 255, 0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 80% 80%, rgba(77, 125, 255, 0.05) 0%, transparent 70%);
+}
+
+.section-journey {
+  background:
+    radial-gradient(ellipse 70% 50% at 75% 20%, rgba(77, 125, 255, 0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 60% at 15% 75%, rgba(179, 140, 255, 0.04) 0%, transparent 65%);
+}
+
+.section-craft {
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 60%, rgba(51, 229, 255, 0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 85% 30%, rgba(77, 125, 255, 0.04) 0%, transparent 60%);
+}
+
+.section-about {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 40%, rgba(179, 140, 255, 0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 90% 80%, rgba(164, 107, 255, 0.04) 0%, transparent 60%);
+}
+
+.section-contact {
+  background:
+    radial-gradient(ellipse 60% 50% at 60% 70%, rgba(255, 90, 230, 0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 20% 30%, rgba(179, 140, 255, 0.04) 0%, transparent 60%);
+}
+
+/* Smooth seam between sections — top edge fade via ::before */
+.section-seam::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6rem;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--bg-900), transparent);
+}
+
+/* Bottom edge fade via ::after */
+.section-seam::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 6rem;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--bg-900), transparent);
+}
+
+/* Hero only needs bottom seam (it's the first section) */
+.section-seam-bottom::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 6rem;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--bg-900), transparent);
+}
+
+/* Contact only needs top seam (it's the last section) */
+.section-seam-top::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6rem;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, var(--bg-900), transparent);
+}
+
+/* ====== Animacje użyteczne w projekcie ====== */
+
+/* Fade in + slide up (wejście sekcji) */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+/* Delikatne unoszenie przy hover (np. karty projektów) */
+@keyframes hover-float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-4px);
+  }
+}
+
+.hover\:animate-float:hover {
+  animation: hover-float 300ms ease-out forwards;
+}
+
+/* Pulsujący neonowy glow (np. avatar, neonowa ramka) */
+@keyframes neon-pulse {
+  0% {
+    box-shadow:
+      0 0 0 rgba(0, 0, 0, 0),
+      0 0 40px rgba(179, 140, 255, 0.4),
+      0 0 80px rgba(77, 125, 255, 0.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 rgba(0, 0, 0, 0),
+      0 0 55px rgba(179, 140, 255, 0.8),
+      0 0 110px rgba(77, 125, 255, 0.6);
+  }
+  100% {
+    box-shadow:
+      0 0 0 rgba(0, 0, 0, 0),
+      0 0 40px rgba(179, 140, 255, 0.4),
+      0 0 80px rgba(77, 125, 255, 0.3);
+  }
+}
+
+.animate-neon {
+  animation: neon-pulse 3.2s ease-in-out infinite;
+}
+
+/* Subtelne parallax / “floating” dla avatara / ilustracji */
+@keyframes float-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float-soft {
+  animation: float-soft 6s ease-in-out infinite;
+}
+
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes bounce-soft {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.scroll-indicator {
+  animation: bounce-soft 1.8s ease-in-out infinite;
+}
+
+/* ====== Print styles for CV page ====== */
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm 16mm;
+  }
+
+  html,
+  body {
+    background: white !important;
+    color: black !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .cv-sheet {
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  /* Avoid page breaks inside sections */
+  section {
+    break-inside: avoid;
+  }
+
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
+  }
+}
+
+/* ====== 2K+ monitor scaling ====== */
+@media (min-width: 2048px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 20px;
+  }
 }
