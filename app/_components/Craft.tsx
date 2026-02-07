@@ -21,7 +21,7 @@ const PROJECTS: Project[] = [
     title: "Marczelloo Dashboard",
     description:
       "A personal developer dashboard presenting key information in one place — project stats, quick shortcuts and widgets. Showcases multi-widget UI, real-time data and responsive layout design.",
-    image: "/avatar_nobg.png",
+    image: "/projects/marczelloo_dashboard.png",
     tags: ["Next.js", "Dashboard", "APIs"],
     github: "https://github.com/Marczelloo/Marczelloo-dashboard",
     demo: "https://demo-dashboard.marczelloo.dev/projects",
@@ -31,7 +31,7 @@ const PROJECTS: Project[] = [
     title: "AtlasHub",
     description:
       "A web platform designed as a central hub for organizing resources and projects, divided into sections and categories. Focuses on clear navigation, component-driven frontend architecture and app state management.",
-    image: "/avatar_nobg.png",
+    image: "/projects/atlashub.png",
     tags: ["Next.js", "PostgreSQL", "Tailwind"],
     github: "https://github.com/Marczelloo/atlashub",
     demo: "https://admin-atlashub.marczelloo.dev/landing",
@@ -41,7 +41,7 @@ const PROJECTS: Project[] = [
     title: "BookHaven",
     description:
       "A full-stack online bookstore built with Node.js, Express and MongoDB. Features book browsing, multi-volume management, secure checkout logic and a clean MVC-style backend designed for easy expansion.",
-    image: "/avatar_nobg.png",
+    image: "/projects/bookhaven.png",
     tags: ["Node.js", "Express", "MongoDB"],
     github: "https://github.com/Marczelloo/BookHaven",
     demo: "https://bookhaven.marczelloo.dev/",
@@ -51,7 +51,7 @@ const PROJECTS: Project[] = [
     title: "NeoBeat Buddy",
     description:
       "A high-performance Discord music bot built with Discord.js, Lavalink and Poru — features slash-only controls, live equaliser presets, queue management, adaptive autoplay and a Docker-ready production stack.",
-    image: "/avatar_nobg.png",
+    image: "/projects/neobeatbuddy.png",
     tags: ["Discord.js", "Node.js", "Lavalink"],
     github: "https://github.com/Marczelloo/NeoBeat-Buddy",
     demo: "https://discord.com/invite/szxrjutGBD",
@@ -62,7 +62,7 @@ const PROJECTS: Project[] = [
     title: "CasinoSimulator",
     description:
       "A casino simulator in C# that recreates popular gambling games with a focus on gameplay logic, player state management and odds balancing. Demonstrates object-oriented design and modular game mechanics.",
-    image: "/avatar_nobg.png",
+    image: "/projects/casino_simulator.png",
     tags: ["C#", "OOP", "Game Logic"],
     github: "https://github.com/Marczelloo/CasinoSimulator",
   },
