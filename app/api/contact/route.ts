@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
+import dns from "node:dns/promises";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +32,7 @@ function isRateLimited(ip: string): boolean {
 }
 
 /* ── Validation helpers ── */
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 interface ContactPayload {
   name: string;
@@ -141,11 +142,28 @@ export async function POST(request: Request) {
 
     const { data } = result;
 
+    /* Verify the email domain has MX records (real mail server) */
+    const domain = data.email.split("@")[1];
+    try {
+      const mxRecords = await dns.resolveMx(domain);
+      if (!mxRecords || mxRecords.length === 0) {
+        return NextResponse.json(
+          { error: "This email domain doesn't appear to accept mail. Please use a valid email." },
+          { status: 400 }
+        );
+      }
+    } catch {
+      return NextResponse.json(
+        { error: "Could not verify your email domain. Please check for typos." },
+        { status: 400 }
+      );
+    }
+
     /* Send email via Resend */
     const { error: resendError } = await getResend().emails.send({
       from: "Portfolio Contact <onboarding@resend.dev>",
       to: RECIPIENT_EMAIL,
-      replyTo: data.email,
+      replyTo: `${data.name} <${data.email}>`,
       subject: `Portfolio message from ${data.name}`,
       text: [`Name: ${data.name}`, `Email: ${data.email}`, "", "Message:", data.message].join("\n"),
     });
