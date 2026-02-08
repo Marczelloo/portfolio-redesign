@@ -54,8 +54,8 @@ function validate(body: unknown): { ok: true; data: ContactPayload } | { ok: fal
     return { ok: false, error: "Please provide a valid email address." };
   }
 
-  if (typeof message !== "string" || message.trim().length < 10 || message.trim().length > 5000) {
-    return { ok: false, error: "Message must be between 10 and 5000 characters." };
+  if (typeof message !== "string" || message.trim().length < 5 || message.trim().length > 5000) {
+    return { ok: false, error: "Message must be between 5 and 5000 characters." };
   }
 
   // Basic honeypot / spam patterns

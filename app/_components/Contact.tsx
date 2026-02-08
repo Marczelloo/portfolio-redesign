@@ -7,10 +7,12 @@ import FloatingShapes from "./FloatingShapes";
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setStatus("sending");
+    setErrorMsg("");
 
     try {
       const res = await fetch("/api/contact", {
@@ -19,7 +21,12 @@ export default function Contact() {
         body: JSON.stringify(form),
       });
 
-      if (!res.ok) throw new Error("Failed to send");
+      const data = await res.json();
+
+      if (!res.ok) {
+        setErrorMsg(data?.error ?? "Something went wrong.");
+        throw new Error(data?.error ?? "Failed to send");
+      }
 
       setStatus("sent");
       setForm({ name: "", email: "", message: "" });
@@ -146,7 +153,7 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
-              Something went wrong. Please try again.
+              {errorMsg || "Something went wrong. Please try again."}
             </motion.p>
           )}
         </motion.form>
