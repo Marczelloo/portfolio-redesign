@@ -211,6 +211,10 @@ export default function Contact() {
           <a href="mailto:moskwamarcel@gmail.com" className="transition hover:text-primary-300">
             Email
           </a>
+          <span className="text-border-subtle">|</span>
+          <a href="/privacy" className="transition hover:text-primary-300">
+            Privacy
+          </a>
         </div>
       </motion.footer>
     </section>
