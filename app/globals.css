@@ -371,3 +371,18 @@ html::-webkit-scrollbar {
     font-size: 20px;
   }
 }
+
+/* ====== Gradient Text Animation ====== */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 200% auto;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
