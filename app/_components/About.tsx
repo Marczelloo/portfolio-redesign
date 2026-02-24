@@ -58,13 +58,13 @@ export default function About() {
   return (
     <section
       id="about"
-      className="section section-about section-seam relative h-screen flex flex-col justify-center overflow-hidden"
+      className="section section-about section-seam relative min-h-screen md:h-screen flex flex-col justify-center overflow-hidden pb-32 md:pb-0"
     >
       <FloatingShapes section="about" />
 
-      {/* Chapter label */}
+      {/* Chapter label - relative on mobile */}
       <motion.div
-        className="absolute top-8 left-8 sm:top-12 sm:left-12 z-20"
+        className="relative top-0 left-0 md:absolute md:top-8 md:left-8 sm:md:top-12 sm:md:left-12 z-20 px-6 sm:px-8 pt-6 md:pt-0"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -76,16 +76,16 @@ export default function About() {
       </motion.div>
 
       {/* ==================== BENTO GRID ==================== */}
-      <div className="relative z-10 flex-1 flex items-center justify-center px-6 sm:px-8 lg:px-16 pt-20 sm:pt-24 pb-8">
+      <div className="relative z-10 flex-1 flex items-center justify-center px-4 sm:px-6 md:px-8 lg:px-16 py-6 md:py-12">
         {/* Ambient background glow */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,_rgba(124,71,230,0.08),_transparent_60%)]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] md:w-[800px] h-[400px] md:h-[600px] bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,_rgba(124,71,230,0.08),_transparent_60%)]" />
         </div>
 
         {/* Bento Grid Container */}
         <div className="relative w-full max-w-5xl">
-          {/* CSS Grid: 2 columns, responsive */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+          {/* CSS Grid: 1 column on mobile, 2 on larger screens */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
             {BENTO_CARDS.map((card, index) => (
               <motion.div
                 key={card.id}
@@ -97,18 +97,18 @@ export default function About() {
               >
                 {/* Bento Card */}
                 <motion.div
-                  className="relative h-full min-h-[200px] sm:min-h-[240px] rounded-2xl lg:rounded-3xl overflow-hidden
+                  className="relative h-full min-h-[180px] sm:min-h-[200px] md:min-h-[240px] rounded-xl sm:rounded-2xl lg:rounded-3xl overflow-hidden
                              border border-border-subtle/40 bg-surface-900/50 backdrop-blur-xl
                              shadow-[0_4px_40px_-12px_rgba(0,0,0,0.4)]
                              transition-all duration-300 hover:border-primary-500/50 hover:shadow-[0_8px_50px_-12px_rgba(124,71,230,0.15)]
-                             p-6 sm:p-8 lg:p-10"
+                             p-4 sm:p-6 md:p-8 lg:p-10"
                   variants={cardHover}
                   initial="rest"
                   whileHover="hover"
                 >
                   {/* Watermark icon - large faded background */}
                   <motion.div
-                    className="absolute bottom-0 right-0 w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 opacity-[0.03] pointer-events-none text-primary-400"
+                    className="absolute bottom-0 right-0 w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 opacity-[0.03] pointer-events-none text-primary-400"
                     variants={iconParallax}
                     transition={{ duration: 0.4, ease: "easeOut" }}
                   >
@@ -116,11 +116,11 @@ export default function About() {
                   </motion.div>
 
                   {/* Corner accent */}
-                  <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-primary-500/20 rounded-tl-xl transition-colors duration-300 group-hover:border-primary-500/40" />
+                  <div className="absolute top-0 left-0 w-10 h-10 sm:w-12 sm:h-12 border-t border-l border-primary-500/20 rounded-tl-xl transition-colors duration-300 group-hover:border-primary-500/40" />
 
                   {/* Content */}
                   <div className="relative z-10">
-                    <h3 className="text-xl sm:text-2xl lg:text-3xl font-semibold text-text-base mb-4 transition-colors duration-300 group-hover:text-primary-200">
+                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-text-base mb-3 sm:mb-4 transition-colors duration-300 group-hover:text-primary-200">
                       {card.title}
                     </h3>
                     <p className="text-sm sm:text-base text-text-soft leading-relaxed">
@@ -129,7 +129,7 @@ export default function About() {
                   </div>
 
                   {/* Hover glow effect */}
-                  <div className="absolute inset-0 rounded-2xl lg:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                  <div className="absolute inset-0 rounded-xl sm:rounded-2xl lg:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <div className="absolute inset-0 bg-gradient-to-br from-primary-500/5 via-transparent to-transparent" />
                   </div>
                 </motion.div>

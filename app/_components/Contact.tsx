@@ -69,13 +69,13 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="section section-contact section-seam-top relative h-screen flex flex-col justify-center overflow-hidden"
+      className="section section-contact section-seam-top relative min-h-screen md:h-screen flex flex-col overflow-hidden pb-40 md:pb-0"
     >
       <FloatingShapes section="contact" />
 
-      {/* Chapter label */}
+      {/* Chapter label - relative on mobile */}
       <motion.div
-        className="absolute top-8 left-8 sm:top-12 sm:left-12 z-20"
+        className="relative top-0 left-0 md:absolute md:top-8 md:left-8 sm:md:top-12 sm:md:left-12 z-20 px-6 sm:px-8 pt-6 md:pt-0"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -87,12 +87,12 @@ export default function Contact() {
       </motion.div>
 
       {/* ==================== SPLIT SCREEN ==================== */}
-      <div className="relative z-10 flex h-full w-full flex-col lg:flex-row pt-16 sm:pt-20">
+      <div className="relative z-10 flex-1 flex flex-col lg:flex-row">
         {/* ==================== LEFT: THE HOOK ==================== */}
-        <div className="lg:w-1/2 flex flex-col justify-center px-6 sm:px-8 lg:px-12 xl:px-16 py-8 lg:py-12">
+        <div className="lg:w-1/2 flex flex-col justify-center px-6 sm:px-8 lg:px-12 xl:px-16 py-6 lg:py-12">
           {/* Ambient glow */}
           <div className="absolute inset-0 pointer-events-none lg:left-0 lg:w-1/2">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,_rgba(124,71,230,0.08),_transparent_60%)]" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[radial-gradient(ellipse_50%_40%_at_50%_50%,_rgba(124,71,230,0.08),_transparent_60%)]" />
           </div>
 
           <motion.div
@@ -104,7 +104,7 @@ export default function Contact() {
           >
             {/* Huge bold typography */}
             <motion.h1
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-text-base leading-tight mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-text-base leading-tight mb-4 md:mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -116,7 +116,7 @@ export default function Contact() {
 
             {/* Friendly paragraph */}
             <motion.p
-              className="text-base sm:text-lg text-text-soft leading-relaxed mb-10 lg:mb-12"
+              className="text-sm sm:text-base md:text-lg text-text-soft leading-relaxed mb-6 md:mb-10 lg:mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -128,7 +128,7 @@ export default function Contact() {
 
             {/* Social icon buttons */}
             <motion.div
-              className="flex flex-wrap items-center gap-4"
+              className="flex items-center gap-3 md:gap-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -140,18 +140,20 @@ export default function Contact() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16
-                             rounded-2xl bg-surface-800/40 backdrop-blur-sm border border-border-subtle/50
+                  className="group relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16
+                             rounded-xl sm:rounded-2xl bg-surface-800/40 backdrop-blur-sm border border-border-subtle/50
                              text-text-mute transition-all duration-300
                              hover:border-primary-500/50 hover:text-primary-300 hover:shadow-[0_0_24px_rgba(124,71,230,0.2)]"
                   whileHover={{ scale: 1.08, y: -4 }}
                   whileTap={{ scale: 0.95 }}
                   aria-label={social.name}
                 >
-                  {social.icon}
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6" viewBox={social.name === "Email" ? "0 0 24 24" : "0 0 24 24"} fill={social.name === "Email" ? "none" : "currentColor"} stroke={social.name === "Email" ? "currentColor" : undefined} strokeWidth={social.name === "Email" ? 2 : undefined}>
+                    {social.icon.props.children}
+                  </svg>
 
-                  {/* Tooltip */}
-                  <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-medium uppercase tracking-wider text-text-mute opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                  {/* Tooltip - hidden on mobile */}
+                  <span className="hidden md:block absolute -bottom-8 left-1/2 -translate-x-1/2 text-[10px] font-medium uppercase tracking-wider text-text-mute opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
                     {social.name}
                   </span>
                 </motion.a>
@@ -161,7 +163,7 @@ export default function Contact() {
         </div>
 
         {/* ==================== RIGHT: THE GLASS FORM ==================== */}
-        <div className="lg:w-1/2 flex flex-col justify-center px-6 sm:px-8 lg:px-12 xl:px-16 py-8 lg:py-12">
+        <div className="lg:w-1/2 flex flex-col justify-center px-6 sm:px-8 lg:px-12 xl:px-16 py-6 lg:py-12">
           <motion.div
             className="relative z-10 max-w-lg lg:max-w-xl mx-auto w-full"
             initial={{ opacity: 0, x: 30 }}
@@ -171,21 +173,21 @@ export default function Contact() {
           >
             {/* Glassmorphism form card */}
             <div
-              className="relative rounded-3xl overflow-hidden
+              className="relative rounded-2xl sm:rounded-3xl overflow-hidden
                          border border-primary-500/20
                          bg-surface-900/60 backdrop-blur-xl
                          shadow-[0_8px_64px_-16px_rgba(124,71,230,0.12)]
-                         p-6 sm:p-8 lg:p-10"
+                         p-4 sm:p-6 md:p-8 lg:p-10"
             >
               {/* Decorative corner accents */}
-              <div className="absolute top-0 left-0 w-16 h-16 border-t border-l border-primary-500/30 rounded-tl-3xl" />
-              <div className="absolute top-0 right-0 w-16 h-16 border-t border-r border-primary-500/30 rounded-tr-3xl" />
-              <div className="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-primary-500/30 rounded-bl-3xl" />
-              <div className="absolute bottom-0 right-0 w-16 h-16 border-b border-r border-primary-500/30 rounded-br-3xl" />
+              <div className="absolute top-0 left-0 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 border-t border-l border-primary-500/30 rounded-tl-2xl sm:rounded-tl-3xl" />
+              <div className="absolute top-0 right-0 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 border-t border-r border-primary-500/30 rounded-tr-2xl sm:rounded-tr-3xl" />
+              <div className="absolute bottom-0 left-0 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 border-b border-l border-primary-500/30 rounded-bl-2xl sm:rounded-bl-3xl" />
+              <div className="absolute bottom-0 right-0 w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 border-b border-r border-primary-500/30 rounded-br-2xl sm:rounded-br-3xl" />
 
-              <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-5">
+              <form onSubmit={handleSubmit} className="relative z-10 flex flex-col gap-4 md:gap-5">
                 {/* Name input */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5 md:gap-2">
                   <label htmlFor="name" className="text-xs font-semibold uppercase tracking-wider text-text-mute">
                     Name
                   </label>
@@ -196,7 +198,7 @@ export default function Contact() {
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="Your name"
-                    className="rounded-xl border border-border-subtle/50 bg-bg-900/60 px-4 py-3.5
+                    className="rounded-xl border border-border-subtle/50 bg-bg-900/60 px-3.5 py-3 md:px-4 md:py-3.5
                                text-sm text-text-base placeholder:text-text-mute/40 outline-none
                                transition-all duration-300
                                focus:border-primary-500 focus:bg-bg-900/80
@@ -205,7 +207,7 @@ export default function Contact() {
                 </div>
 
                 {/* Email input */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5 md:gap-2">
                   <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-text-mute">
                     Email
                   </label>
@@ -216,7 +218,7 @@ export default function Contact() {
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="your@email.com"
-                    className="rounded-xl border border-border-subtle/50 bg-bg-900/60 px-4 py-3.5
+                    className="rounded-xl border border-border-subtle/50 bg-bg-900/60 px-3.5 py-3 md:px-4 md:py-3.5
                                text-sm text-text-base placeholder:text-text-mute/40 outline-none
                                transition-all duration-300
                                focus:border-primary-500 focus:bg-bg-900/80
@@ -225,18 +227,18 @@ export default function Contact() {
                 </div>
 
                 {/* Message textarea */}
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1.5 md:gap-2">
                   <label htmlFor="message" className="text-xs font-semibold uppercase tracking-wider text-text-mute">
                     Message
                   </label>
                   <textarea
                     id="message"
                     required
-                    rows={4}
+                    rows={3}
                     value={form.message}
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                     placeholder="Tell me about your project..."
-                    className="resize-none rounded-xl border border-border-subtle/50 bg-bg-900/60 px-4 py-3.5
+                    className="resize-none rounded-xl border border-border-subtle/50 bg-bg-900/60 px-3.5 py-3 md:px-4 md:py-3.5
                                text-sm text-text-base placeholder:text-text-mute/40 outline-none
                                transition-all duration-300
                                focus:border-primary-500 focus:bg-bg-900/80
@@ -248,9 +250,9 @@ export default function Contact() {
                 <motion.button
                   type="submit"
                   disabled={status === "sending"}
-                  className="group relative mt-2 w-full cursor-pointer
+                  className="group relative mt-1 md:mt-2 w-full cursor-pointer
                              rounded-xl bg-gradient-to-r from-primary-700 to-primary-600
-                             px-6 py-4 text-sm font-semibold text-white
+                             px-5 py-3.5 md:px-6 md:py-4 text-sm font-semibold text-white
                              shadow-[0_4px_20px_rgba(124,71,230,0.3)]
                              transition-all duration-300
                              hover:shadow-[0_8px_30px_rgba(124,71,230,0.4)]
@@ -262,11 +264,11 @@ export default function Contact() {
                   {/* Shimmer effect on hover */}
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
 
-                  <span className="relative flex items-center justify-center gap-2.5">
+                  <span className="relative flex items-center justify-center gap-2 md:gap-2.5">
                     {status === "sending" ? (
                       <>
                         <motion.svg
-                          className="w-5 h-5"
+                          className="w-4 h-4 md:w-5 md:h-5"
                           animate={{ rotate: 360 }}
                           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                           viewBox="0 0 24 24"
@@ -280,7 +282,7 @@ export default function Contact() {
                     ) : status === "sent" ? (
                       <>
                         <motion.svg
-                          className="w-5 h-5"
+                          className="w-4 h-4 md:w-5 md:h-5"
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
                           transition={{ type: "spring", stiffness: 400, damping: 15 }}
@@ -291,13 +293,13 @@ export default function Contact() {
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </motion.svg>
-                        Message Sent!
+                        Sent!
                       </>
                     ) : (
                       <>
                         <span>Send Message</span>
                         <motion.svg
-                          className="w-5 h-5"
+                          className="w-4 h-4 md:w-5 md:h-5"
                           viewBox="0 0 24 24"
                           fill="none"
                           stroke="currentColor"
@@ -315,7 +317,7 @@ export default function Contact() {
                 {/* Status messages */}
                 {status === "error" && (
                   <motion.p
-                    className="text-sm font-medium text-red-400 text-center"
+                    className="text-xs sm:text-sm font-medium text-red-400 text-center"
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
@@ -331,7 +333,7 @@ export default function Contact() {
 
       {/* Footer - minimal version */}
       <motion.footer
-        className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-between px-6 sm:px-8 lg:px-12 py-4 text-xs text-text-mute/60 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 z-20 flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-12 py-3 md:py-4 text-[10px] sm:text-xs text-text-mute/60 pointer-events-none"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -340,12 +342,12 @@ export default function Contact() {
         <div className="pointer-events-auto">
           &copy; {new Date().getFullYear()} Marczelloo
         </div>
-        <div className="flex items-center gap-3 pointer-events-auto">
+        <div className="flex items-center gap-2 md:gap-3 pointer-events-auto">
           <a href="/privacy" className="transition hover:text-primary-300">
             Privacy
           </a>
           <span className="text-border-subtle">|</span>
-          <span className="hidden sm:inline">Built with Next.js</span>
+          <span className="hidden xs:inline">Next.js</span>
         </div>
       </motion.footer>
     </section>

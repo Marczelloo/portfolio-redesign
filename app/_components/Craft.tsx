@@ -118,14 +118,14 @@ export default function Craft() {
   return (
     <section
       id="craft"
-      className="section section-craft section-seam relative h-screen flex flex-col justify-center overflow-hidden"
+      className="section section-craft section-seam relative min-h-screen md:h-screen flex flex-col overflow-hidden pb-32 md:pb-0"
       aria-label="Projects showcase"
     >
       <FloatingShapes section="craft" />
 
-      {/* Chapter label */}
+      {/* Chapter label - relative on mobile */}
       <motion.div
-        className="absolute top-8 left-8 sm:top-12 sm:left-12 z-20"
+        className="relative top-0 left-0 md:absolute md:top-8 md:left-8 sm:md:top-12 sm:md:left-12 z-20 px-6 sm:px-8 pt-6 md:pt-0"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -137,15 +137,15 @@ export default function Craft() {
       </motion.div>
 
       {/* Main container - split view */}
-      <div className="relative z-10 flex h-full w-full flex-col lg:flex-row">
-        {/* ==================== INDEX (LEFT) ==================== */}
+      <div className="relative z-10 flex-1 flex flex-col lg:flex-row">
+        {/* ==================== INDEX (LEFT/TOP) ==================== */}
         <nav
           className="lg:w-80 xl:w-96 flex-shrink-0 flex lg:flex-col overflow-x-auto lg:overflow-x-visible overflow-y-auto
                      border-b lg:border-b-0 lg:border-r border-border-subtle/30
                      bg-bg-900/40 backdrop-blur-sm"
           aria-label="Project navigation"
         >
-          <div className="flex lg:flex-col gap-px pt-20 sm:pt-24 px-4 pb-4 lg:p-0 lg:pt-24 lg:pb-12 lg:pl-12 min-w-max lg:min-w-0">
+          <div className="flex lg:flex-col gap-px px-4 py-3 md:p-0 md:pt-24 md:pb-12 md:pl-12 min-w-max lg:min-w-0">
             {PROJECTS.map((project, index) => {
               const isActive = index === activeIndex;
               const numStr = project.id.toString().padStart(2, "0");
@@ -154,9 +154,9 @@ export default function Craft() {
                 <motion.button
                   key={project.id}
                   onClick={() => setActiveIndex(index)}
-                  className={`group relative flex items-center gap-4 lg:gap-5 px-4 py-4 lg:py-5 lg:pr-8
-                              rounded-lg lg:rounded-r-xl lg:rounded-l-none transition-all duration-300
-                              text-left outline-none
+                  className={`group relative flex items-center gap-3 md:gap-5 px-3 py-3 md:py-5 md:pr-8
+                              rounded-lg md:rounded-r-xl md:rounded-l-none transition-all duration-300
+                              text-left outline-none flex-shrink-0
                               ${isActive ? "bg-surface-800/60" : "hover:bg-surface-800/30"}`}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -167,7 +167,7 @@ export default function Craft() {
                 >
                   {/* Number indicator */}
                   <span
-                    className={`font-mono text-sm lg:text-base transition-colors duration-300 min-w-[2rem]
+                    className={`font-mono text-xs md:text-sm lg:text-base transition-colors duration-300 min-w-[1.75rem] md:min-w-[2rem]
                                 ${isActive ? "text-primary-400" : "text-text-mute group-hover:text-text-soft"}`}
                   >
                     {numStr}
@@ -175,7 +175,7 @@ export default function Craft() {
 
                   {/* Title */}
                   <span
-                    className={`text-sm lg:text-base font-medium truncate max-w-[140px] lg:max-w-[180px]
+                    className={`text-xs md:text-sm lg:text-base font-medium truncate max-w-[100px] sm:max-w-[140px] md:max-w-[180px]
                                 transition-colors duration-300
                                 ${isActive ? "text-text-base" : "text-text-soft group-hover:text-text-base"}`}
                   >
@@ -204,9 +204,9 @@ export default function Craft() {
           </div>
         </nav>
 
-        {/* ==================== STAGE (RIGHT) ==================== */}
+        {/* ==================== STAGE (RIGHT/BOTTOM) ==================== */}
         <main
-          className="flex-1 relative flex items-center justify-center p-6 sm:p-8 lg:p-12 overflow-hidden"
+          className="flex-1 relative flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-12 overflow-hidden"
           onMouseEnter={() => setIsHoveringStage(true)}
           onMouseLeave={() => setIsHoveringStage(false)}
         >
@@ -234,11 +234,11 @@ export default function Craft() {
               animate="center"
               exit="exit"
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row gap-6 lg:gap-8 items-center"
+              className="relative z-10 w-full max-w-6xl flex flex-col lg:flex-row gap-4 md:gap-6 lg:gap-8 items-center"
             >
               {/* Image container with cinematic frame */}
               <motion.div
-                className="relative w-full lg:w-[70%] aspect-video rounded-2xl overflow-hidden
+                className="relative w-full lg:w-[70%] aspect-video rounded-xl md:rounded-2xl overflow-hidden
                            border border-border-subtle/50 bg-surface-900/60 backdrop-blur-sm
                            shadow-[0_8px_60px_-12px_rgba(0,0,0,0.6)]"
                 initial={{ scale: 0.95, opacity: 0 }}
@@ -272,7 +272,7 @@ export default function Craft() {
               <div className="w-full lg:w-2/5 flex flex-col justify-center">
                 {/* Title with reveal */}
                 <motion.h2
-                  className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-text-base mb-4"
+                  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-text-base mb-3 md:mb-4"
                   custom={0}
                   variants={fadeInUp}
                   initial="hidden"
@@ -284,7 +284,7 @@ export default function Craft() {
 
                 {/* Description with stagger */}
                 <motion.p
-                  className="text-sm sm:text-base text-text-soft leading-relaxed mb-6"
+                  className="text-xs sm:text-sm md:text-base text-text-soft leading-relaxed mb-4 md:mb-6"
                   custom={1}
                   variants={fadeInUp}
                   initial="hidden"
@@ -296,7 +296,7 @@ export default function Craft() {
 
                 {/* Tech stack badges */}
                 <motion.div
-                  className="flex flex-wrap gap-2 mb-8"
+                  className="flex flex-wrap gap-1.5 md:gap-2 mb-4 md:mb-8"
                   custom={2}
                   variants={fadeInUp}
                   initial="hidden"
@@ -306,9 +306,9 @@ export default function Craft() {
                   {activeProject.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="inline-flex items-center px-3 py-1 rounded-full
+                      className="inline-flex items-center px-2 md:px-3 py-1 rounded-full
                                  border border-border-subtle/60 bg-surface-800/60
-                                 text-xs font-medium uppercase tracking-wider text-text-mute"
+                                 text-[10px] md:text-xs font-medium uppercase tracking-wider text-text-mute"
                     >
                       {tag}
                     </span>
@@ -317,7 +317,7 @@ export default function Craft() {
 
                 {/* Action links */}
                 <motion.div
-                  className="flex flex-wrap items-center gap-4"
+                  className="flex flex-wrap items-center gap-2 md:gap-4"
                   custom={3}
                   variants={fadeInUp}
                   initial="hidden"
@@ -327,30 +327,31 @@ export default function Craft() {
                   {activeProject.github && (
                     <a
                       href={activeProject.github}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
-                                 bg-primary-700/90 hover:bg-primary-600 text-white text-sm font-semibold
+                      className="inline-flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-lg
+                                 bg-primary-700/90 hover:bg-primary-600 text-white text-xs sm:text-sm font-semibold
                                  transition-all duration-200 hover:shadow-[0_0_20px_rgba(124,71,230,0.35)]
                                  focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-bg-900"
                       aria-label={`View ${activeProject.title} on GitHub`}
                     >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
                       </svg>
-                      GitHub
+                      <span className="hidden xs:inline">GitHub</span>
+                      <span className="xs:hidden">Repo</span>
                     </a>
                   )}
 
                   {activeProject.demo && (
                     <a
                       href={activeProject.demo}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg
+                      className="inline-flex items-center gap-2 px-4 py-2 md:px-5 md:py-2.5 rounded-lg
                                  border border-border-subtle/60 hover:border-primary-500/50
-                                 text-text-soft hover:text-primary-300 text-sm font-semibold
+                                 text-text-soft hover:text-primary-300 text-xs sm:text-sm font-semibold
                                  transition-all duration-200 hover:bg-surface-800/40
                                  focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-bg-900"
                       aria-label={`View live demo of ${activeProject.title}`}
                     >
-                      <span>Live Demo</span>
+                      <span>Demo</span>
                       <motion.span
                         animate={{ x: isHoveringStage ? 4 : 0 }}
                         transition={{ duration: 0.2 }}
@@ -367,8 +368,8 @@ export default function Craft() {
 
           {/* Navigation hints - subtle */}
           <motion.div
-            className="absolute bottom-6 right-6 lg:bottom-8 lg:right-12 flex items-center gap-3
-                       text-text-mute/60 text-xs font-medium uppercase tracking-wider"
+            className="absolute bottom-4 right-4 md:bottom-6 md:right-6 lg:bottom-8 lg:right-12 flex items-center gap-2 md:gap-3
+                       text-text-mute/60 text-[10px] md:text-xs font-medium uppercase tracking-wider"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -381,12 +382,12 @@ export default function Craft() {
 
       {/* Mobile: scroll hint for index */}
       <motion.div
-        className="lg:hidden absolute bottom-20 left-8 text-text-mute/40 text-[10px] uppercase tracking-widest"
+        className="lg:hidden absolute bottom-20 left-6 md:left-8 text-text-mute/40 text-[10px] uppercase tracking-widest"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        &larr; Scroll to explore &rarr;
+        &larr; Swipe projects &rarr;
       </motion.div>
     </section>
   );
