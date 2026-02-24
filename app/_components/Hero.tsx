@@ -199,31 +199,6 @@ export default function Hero() {
         </motion.span>
       </motion.button>
 
-      {/* ==================== BOTTOM NAV BAR (preserved) ==================== */}
-      <motion.nav
-        className="absolute bottom-0 left-0 right-0 z-30 flex items-center justify-center pb-4 sm:pb-5 pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-      >
-        <div className="flex items-center gap-1 px-4 py-2 rounded-full border border-border-subtle/30 bg-surface-900/60 backdrop-blur-sm pointer-events-auto shadow-lg">
-          {[
-            { id: "hero", label: "Home" },
-            { id: "journey", label: "Journey" },
-            { id: "craft", label: "Craft" },
-            { id: "about", label: "About" },
-            { id: "contact", label: "Contact" },
-          ].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className="px-3 py-1.5 text-xs font-medium text-text-mute transition-colors hover:text-primary-300 rounded-full hover:bg-primary-900/20"
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </motion.nav>
     </section>
   );
 }

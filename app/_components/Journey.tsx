@@ -76,13 +76,13 @@ export default function Journey() {
   return (
     <section
       id="journey"
-      className="section section-journey section-seam relative h-screen flex flex-col justify-center overflow-hidden"
+      className="section section-journey section-seam relative min-h-screen md:h-screen flex flex-col justify-center overflow-hidden pb-32 md:pb-0"
     >
       <FloatingShapes section="journey" />
 
-      {/* Chapter label */}
+      {/* Chapter label - relative on mobile for natural flow, absolute on desktop */}
       <motion.div
-        className="absolute top-8 left-8 sm:top-12 sm:left-12 z-20"
+        className="relative top-0 left-0 md:absolute md:top-8 md:left-8 sm:md:top-12 sm:md:left-12 z-20 px-6 sm:px-8 pt-6 md:pt-0"
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -94,7 +94,7 @@ export default function Journey() {
       </motion.div>
 
       {/* ==================== CENTER STAGE: CONTENT CARD ==================== */}
-      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 sm:px-8 pt-16 sm:pt-20 pb-28 sm:pb-32">
+      <div className="relative z-10 flex-1 flex flex-col items-center justify-center px-6 sm:px-8 py-8 md:py-12 gap-6 md:gap-0">
         {/* Ambient glow behind card */}
         <motion.div
           className="absolute inset-0 pointer-events-none flex items-center justify-center"
@@ -212,7 +212,7 @@ export default function Journey() {
       </div>
 
       {/* ==================== BOTTOM: HORIZONTAL TIMELINE TRACK ==================== */}
-      <div className="absolute bottom-16 sm:bottom-20 left-0 right-0 h-28 sm:h-32 flex items-end justify-center pb-6 sm:pb-8 z-20">
+      <div className="relative bottom-0 md:absolute md:bottom-16 sm:md:bottom-20 left-0 right-0 h-auto md:h-28 sm:md:h-32 flex items-end justify-center py-6 pb-24 md:pb-6 sm:md:pb-8 z-20">
         <div className="w-full max-w-4xl px-4 sm:px-8">
           {/* Timeline nodes container */}
           <div className="relative flex items-center justify-between gap-2 sm:gap-4" id="timeline-track">
@@ -248,7 +248,7 @@ export default function Journey() {
                 <motion.button
                   key={item.id}
                   onClick={() => setActiveId(item.id)}
-                  className="relative flex flex-col items-center gap-2 sm:gap-3 group outline-none p-4 -mx-4"
+                  className="relative flex flex-col items-center gap-2 sm:gap-3 group outline-none px-2 sm:px-4"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -285,9 +285,9 @@ export default function Journey() {
                     </motion.span>
                   </div>
 
-                  {/* Role title below node (only show on active or hover) */}
+                  {/* Role title below node (only show on active or hover) - with max width and text wrap for mobile */}
                   <motion.span
-                    className="absolute -bottom-6 text-[10px] sm:text-xs font-medium text-text-soft whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
+                    className="absolute -bottom-12 sm:-bottom-6 max-w-[80px] sm:max-w-none text-[10px] sm:text-xs font-medium break-words sm:whitespace-nowrap text-text-soft text-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none leading-tight"
                     animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 4 }}
                     transition={{ duration: 0.2 }}
                   >
